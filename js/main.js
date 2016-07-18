@@ -1,14 +1,13 @@
-// Initially disable the button
-$("button").prop("disabled", true);
-
-// When the value of the text area changes...
-$("textarea").on("input", function () {
-    // If there's at least one character...
-    if ($(this).val().length > 0) {
-        // Enable the button.
-        $("button").prop("disabled", false);
-    } else {
-        // Else, disable the button.
-        $("button").prop("disabled", true);
+var TweetBox = React.createClass({
+    render: function() {
+        return (
+            <div className="well clearfix">
+                <textarea className="form-control"></textarea>
+                <br/>
+                <button className="btn btn-primary pull-right">Tweet</button>
+            </div>
+        );
     }
 });
+
+ReactDOM.render(<TweetBox/>, document.getElementById("tweet-yo"));

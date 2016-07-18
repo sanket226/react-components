@@ -2,21 +2,32 @@
 <html>
     <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>        
         <meta charset="utf-8">
         <title>Tweet Box | React</title>
     </head>
     <body>
-        <div class="jumbotron">
-            <div class="container text-center">
-                <h3 class="text-uppercase">Express your feelings</h3>
-                <textarea id="js-tweet-input" class="form-control"></textarea><br/>
-                <button id="js-tweet-btn" class="btn btn-primary btn-lg pull-right">Tweet</button>
-            </div>
-        </div>
-        
-        <script src="https://code.jquery.com/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
+        <div id="tweet-yo"></div>
+        <script type="text/jsx">
+            var TweetBox = React.createClass({
+                handleChange: function(event){
+                    console.log(event.target.value);
+                },
+                render: function() {
+                    return (
+                        <div className="well clearfix">
+                            <textarea className="form-control" onChange={this.handleChange}></textarea>
+                            <br/>
+                            <button className="btn btn-primary pull-right" disabled>Tweet</button>
+                        </div>
+                    );
+                }
+            });
+
+            ReactDOM.render(<TweetBox/>, document.getElementById("tweet-yo"));
+        </script>
     </body>
 </html>
