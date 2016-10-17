@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+        <meta charset="utf-8">
+        <title>Real Time Search</title>
+    </head>
+    <body>
+        <!-- Headline component -->
+        <div id="tweet-yo"></div>
+
+        <script type="text/jsx">
+            
+            var SearchExample = React.createClass({
+
+                getInitialState: function(){
+                    return { searchString: '' };
+                },
+                
+                //get the user search term
+                handleChange: function(e){
+                    this.setState({searchString:e.target.value});
+                },
+
+                render: function() {
+
+                    var names = this.props.items,
+                        searchName = this.state.searchString;
+
+                    //match based on search term
+                    if(searchName.length > 0){
+                        names = names.filter(function(l){
+                            return l.name.match(searchName);
+                        });
+                    }
+
+                    return <div>
+                                <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
+                                <ul> 
+                                    { names.map(function(l){
+                                        return <li>{l.name}</li>
+                                    }) }
+                                </ul>
+                            </div>;
+
+                }
+            });
+
+
+            var libraries = [
+                { name: 'Backbone.js'},
+                { name: 'AngularJS'},
+                { name: 'jQuery'},
+            ];
+
+            // Render the SearchExample component on the page
+            ReactDOM.render(
+                <SearchExample items={libraries} />,
+                document.getElementById('tweet-yo')
+            );
+        </script>
+    </body>
+</html>
