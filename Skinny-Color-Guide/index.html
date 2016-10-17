@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://static.zalora.com/css/onsite.css" rel="stylesheet" type="text/css" />
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>        
+        <meta charset="utf-8">
+        <title>Loop over data | React</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <h3 class="text-uppercase">Skinny Color Palette</h3><br/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="show-data-yo"></div>
+                </div>                
+            </div>
+        </div>
+
+        <script type="text/jsx">
+
+            var skinnyColorGuide = [
+                {
+                    "id" : 1,
+                    "name" : "skyblue"
+                },
+                {
+                    "id" : 2,
+                    "name" : "mint"
+                },
+                {
+                    "id" : 3,
+                    "name" : "lilac"
+                },
+                {
+                    "id" : 4,
+                    "name" : "cottoncandy"
+                },
+                {
+                    "id" : 5,
+                    "name" : "salmon"
+                },
+                {
+                    "id" : 6,
+                    "name" : "rose"
+                },
+                {
+                    "id" : 7,
+                    "name" : "aluminium"
+                },
+                {
+                    "id" : 8,
+                    "name" : "powderblue"
+                },
+                {
+                    "id" : 9,
+                    "name" : "pine"
+                },
+                {
+                    "id" : 10,
+                    "name" : "heather"
+                },
+                {
+                    "id" : 11,
+                    "name" : "blush"
+                },
+                {
+                    "id" : 12,
+                    "name" : "peach"
+                },
+                {
+                    "id" : 13,
+                    "name" : "rosewood"
+                },
+                {
+                    "id" : 14,
+                    "name" : "storm"
+                }
+            ]
+
+            var Hello = React.createClass({
+                render: function() {
+                    var skinnyClass, lightSkinny, darkSkinny;
+                    var nameList = skinnyColorGuide.map(function(skinny){
+                        lightSkinny = "col-xs-12 col-sm-6 col-md-6 col-lg-4 text-center text-uppercase" + " cms-sb-" + skinny.name + " cms-sb-highlight";
+                        darkSkinny = "col-xs-12 col-sm-6 col-md-6 col-lg-4 text-center text-uppercase" + " cms-sb-" + skinny.name;
+                        skinnyClass = (skinny.id>=8) ? (lightSkinny) : (darkSkinny);
+                        
+                        return <div className={skinnyClass}>{skinny.name}</div>                       
+                        
+                    });
+
+                    return  <div>{nameList}</div>
+                }
+            });            
+
+            ReactDOM.render(<Hello/>, document.getElementById("show-data-yo"));
+        </script>
+    </body>
+</html>
