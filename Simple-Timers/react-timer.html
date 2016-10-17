@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script src="https://fb.me/react-15.1.0.js"></script>
+        <script src="https://fb.me/react-dom-15.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+        <meta charset="utf-8">
+        <title>Timer in React</title>
+    </head>
+    <body>
+        <!-- Headline component -->
+        <div id="tweet-yo"></div>
+
+        <script type="text/jsx">
+            var TimerExample = React.createClass({
+                
+                //is called before the render
+                //object returned is in this.state, so we can use it later
+                getInitialState:  function(){
+                    return { elapsed: 0 };
+                },
+                
+                //called when component has rendered onto the page
+                componentDidMount: function(){
+                    this.timer = setInterval(this.ticker, 50);
+                },
+                
+                ticker: function(){
+                    var currentDate = new Date();
+                    var startDate = this.props.start;
+                    elapsed = currentDate - startDate;
+                    this.setState({elapsed});
+                },
+                
+                //render method is called whenever state changes
+                render: function(){
+                    var elapsed = Math.round(this.state.elapsed/100); 
+                    var seconds = (elapsed/10).toFixed(1);
+                    return <p>Started: {seconds}</p>
+                }
+            });
+
+            ReactDOM.render(<TimerExample start={Date.now()}/>, document.getElementById("tweet-yo"));
+        </script>
+    </body>
+</html>
