@@ -74,4 +74,4 @@ var HomePage = React.createClass({
     }
 });
 
-React.render(<HomePage service={employeeService}/>, document.body);
+React.render(<HomePage service={employeeService}/>, document.body); 
