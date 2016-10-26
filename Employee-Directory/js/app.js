@@ -7,9 +7,19 @@ var Header = React.createClass({
 });
 
 var SearchBar = React.createClass({
+    getInitialState: function(){
+        return {searchKey: ""};
+    },
+    searchHandler: function(event){
+        var searchKey = event.target.value;
+        this.setState({
+            searchKey: searchKey
+        });
+        this.props.searchHandler(searchKey);
+    },
     render: function() {
         return (
-            <input type="search"/>
+            <input type="search" value={this.state.symbol} onChange={this.searchHandler}/>
         );
     }
 });
@@ -42,22 +52,26 @@ var EmployeeListItem = React.createClass({
 });
 
 var HomePage = React.createClass({
-    render: function() {
-        
-        var employees = [
-            {firstName: 'Christophe', lastName: 'Coenraets'},
-            {firstName: 'Lisa', lastName: 'Jones'},
-            {firstName: 'John', lastName: 'Smith'}
-        ];
-        
+    
+    getInitialState: function() {
+        return {employees: this.props.service.getAllEmployees}
+    },
+    
+    searchHandler: function(key) {
+        this.props.service.findByName(key).done(function(result){
+            this.setState({searchKey: key, employees: result});
+        }.bind(this));
+    },
+    
+    render: function() {        
         return (
             <div>
                 <Header text="Employee Directory"/>
-                <SearchBar />
-                <EmployeeList employees={employees}/>
+                <SearchBar searchHandler={this.searchHandler} />
+                <EmployeeList employees={this.state.employees}/>
             </div>
         );
     }
 });
 
-React.render(<HomePage />, document.body);
+React.render(<HomePage service={employeeService}/>, document.body);
